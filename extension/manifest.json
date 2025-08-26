@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "BG Remover",
+  "version": "1.0",
+  "description": "Remove background from images using AI.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon.png"
+    }
+  },
+  "permissions": ["storage"]
+}
