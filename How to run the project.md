@@ -12,17 +12,9 @@ Open a terminal inside your project folder and run:
 
 **uvicorn src.api:app --reload --host 127.0.0.1 --port 8000**
 
-
-
-
-
 * src.api:app → means inside src/api.py, the variable app = FastAPI().
 
-
-
 * --reload → auto-restarts server when you edit code.
-
-
 
 * Server will run at 👉 http://127.0.0.1:8000
 

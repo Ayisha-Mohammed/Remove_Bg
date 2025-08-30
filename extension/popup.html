@@ -6,21 +6,25 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h2>AI BG Remover</h2>
+  <!-- <h2>AI BG Remover</h2> -->
 
-<<<<<<< HEAD
-  <!-- URL input instead of file -->
-  <input type="text" id="urlInput" placeholder="Paste image URL here" />
-  <button id="removeBtn">Remove Background</button>
+  <div class="container">
+    <div class="content">
+      <h2>Remove Background</h2>
 
-  <div id="output"></div>
+      <!-- Preview container -->
+      <div id="image-container">
+        <img id="preview" src="" width="300" style="display:none;" /><br/>
+      </div>
 
-  <script src="popup.js"></script>
-=======
-  <!-- This is where JS will inject preview + buttons -->
-  <div id="container"></div>
+      <!-- Buttons -->
+      <div class="buttons">
+        <button id="removeBgBtn">Remove Background</button>
+        <button id="downloadBtn">Download</button>
+      </div>
+    </div>
+  </div>
 
   <script src="popup.js"></script> 
->>>>>>> origin/sam-backend
 </body>
 </html>
