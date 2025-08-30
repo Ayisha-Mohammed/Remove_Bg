@@ -3,11 +3,29 @@
   "name": "BG Remover",
   "version": "1.0",
   "description": "Remove background from images using AI.",
+<<<<<<< HEAD
+=======
+  "background": {
+    "service_worker": "background.js"
+  },
+>>>>>>> origin/sam-backend
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "128": "icons/icon.png"
     }
   },
+<<<<<<< HEAD
   "permissions": ["storage"]
+=======
+  "permissions": [
+    "contextMenus",
+    "downloads",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*" 
+  ]
+>>>>>>> origin/sam-backend
 }
