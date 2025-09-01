@@ -2,13 +2,14 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-import os
+import os, base64, re
+from io import BytesIO
+from PIL import Image
 
 # Import your functions
 from src.remove_bg import remove_background
 from src.utils import load_image_from_url
 
-# Config
 app = FastAPI()
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -16,22 +17,33 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # CORS (for Chrome extension)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["chrome-extension://hdddaipoijmjefcnmacdhkpajnkhnied"],  # your extension id
+    allow_origins=["chrome-extension://dnknnafilfolcojcmindcmlbdmmiekga"],  # your extension id
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Request schema
 class ImageRequest(BaseModel):
-    url: str
+    url: str   # can be http(s)://... OR data:image/...
+
+def load_image(req_url: str) -> Image.Image:
+    """
+    Handle both normal URLs and base64 data URLs.
+    """
+    if req_url.startswith("data:image/"):
+        # extract base64 string
+        header, encoded = req_url.split(",", 1)
+        img_bytes = base64.b64decode(encoded)
+        return Image.open(BytesIO(img_bytes)).convert("RGB")
+    else:
+        return load_image_from_url(req_url)
 
 @app.post("/remove_bg")
 def remove_bg_endpoint(req: ImageRequest):
     try:
-        # Load from URL
-        img = load_image_from_url(req.url)
-        
+        # Load image (works with url or base64)
+        img = load_image(req.url)
+
         # Remove background
         output_img = remove_background(img)
 
@@ -43,4 +55,3 @@ def remove_bg_endpoint(req: ImageRequest):
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
-
