@@ -1,30 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BG Remover</title>
-  <link rel="stylesheet" href="popup.css">
+  <meta charset="UTF-8" />
+  <title>AI BG Remover</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <!-- <h2>AI BG Remover</h2> -->
+    <main class="app">
+    <h1 class="title">✨ AI Background Remover ✨</h1>
 
-  <div class="container">
-    <div class="content">
-      <h2>Remove Background</h2>
-
-      <!-- Preview container -->
-      <div id="image-container">
-        <img id="preview" src="" width="300" style="display:none;" /><br/>
-      </div>
-
-      <!-- Buttons -->
-      <div class="buttons">
-        <button id="removeBgBtn">Remove Background</button>
-        <button id="downloadBtn">Download</button>
-      </div>
+    <div class="instructions">
+      <!-- <p>Remove image backgrounds instantly with AI. Upload an image or provide a URL to get started.</p> -->
+      <p>Remove image backgrounds instantly with AI. Provide a URL to get started.</p>
     </div>
-  </div>
 
-  <script src="popup.js"></script> 
+    <!-- <div class="drop-area" id="dropArea">
+      <p>Drag & drop an image here or</p>
+      <span class="browse">Browse files</span>
+      <input type="file" id="fileInput" accept="image/*">
+    </div> -->
+
+    <div class="status" id="statusMessage"></div>
+
+    <section class="stage" id="stage">
+      <!-- Original -->
+      <div class="img-card" id="original-box">
+        <h3>Original Image</h3>
+        <div class="img-container">
+          <img id="preview" src="icons/img_placeholder.jpg" alt="Original" />
+        </div>
+        <button id="removeBgBtn">
+          <span>⚡ Remove Background</span>
+        </button>
+      </div>
+
+      <!-- Processed (hidden initially) -->
+      <div class="img-card processed" id="processed-box" aria-hidden="true">
+        <h3>Background Removed</h3>
+        <div class="img-container">
+          <div class="checker">
+            <img id="processed" src="icons/img_placeholder.jpg" alt="Processed" />
+          </div>
+        </div>
+        <button id="downloadBtn" disabled>
+          <span>⬇️ Download Image</span>
+        </button>
+      </div>
+    </section>
+
+    <div id="loading" class="loading" hidden>
+      <div class="spinner"></div>
+      <p>Processing your image…</p>
+    </div>
+  </main>
+
+
+  <script src="popup.js"></script>
 </body>
 </html>
